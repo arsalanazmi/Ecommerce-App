@@ -1,10 +1,16 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import history from "./history.js";
 import webfont from "webfontloader";
-import Header from "./component/layout/Header/Header.js";
-import Footer from "./component/layout/Footer/Footer.js";
-import Home from "./component/Home/Home.js";
+import {
+  Header,
+  Footer,
+  Home,
+  ProductDetails,
+  Products,
+  Search,
+} from "./Routes";
 
 function App() {
   React.useEffect(() => {
@@ -16,10 +22,14 @@ function App() {
   }, []);
 
   return (
-    <Router>
+    <Router history={history}>
       <Header />
       <Routes>
         <Route exact path="/" element={<Home />} />
+        <Route exact path="/product/:id" element={<ProductDetails />} />
+        <Route exact path="/products" element={<Products />} />
+        <Route path="/products/:keyword" element={<Products />} />
+        <Route exact path="/search" element={<Search />} />
       </Routes>
       <Footer />
     </Router>

@@ -7,4 +7,6 @@ import ProductDetails from "./component/Product/ProductDetails.js";
 import Products from "./component/Product/Products.js";
 import Search from "./component/Product/Search.js";
 
-export { Header, Footer, Home, ProductDetails, Products, Search };
+import LoginSignUp from "./component/User/LoginSignUp";
+
+export { Header, Footer, Home, ProductDetails, Products, Search, LoginSignUp };

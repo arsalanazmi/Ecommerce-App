@@ -1,25 +1,24 @@
 import React, { Fragment, useState } from "react";
 import "./Search.css";
-import history from "../../history"
 import MetaData from "../layout/MetaData";
+import { useNavigate } from "react-router-dom";
 
 const Search = () => {
   const [keyword, setKeyword] = useState("");
-  console.log(keyword);
-  
+  const navigate = useNavigate();
+
   const searchSubmitHandler = (e) => {
     e.preventDefault();
     if (keyword.trim()) {
-      history.push(`/products/${keyword}`);
-      window.location.reload();
+      navigate(`/products/${keyword}`);
     } else {
-      history.push("/products");
+      navigate("/products");
     }
   };
 
   return (
     <Fragment>
-      <MetaData title="Search A Product -- ECOMMERCE"/>
+      <MetaData title="Search A Product -- ECOMMERCE" />
       <form className="searchBox" onSubmit={searchSubmitHandler}>
         <input
           type="text"

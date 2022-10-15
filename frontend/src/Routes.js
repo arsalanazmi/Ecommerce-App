@@ -1,4 +1,5 @@
 import Header from "./component/layout/Header/Header.js";
+import UserOptions from "./component/layout/Header/UserOptions.js";
 import Footer from "./component/layout/Footer/Footer.js";
 
 import Home from "./component/Home/Home.js";
@@ -8,5 +9,18 @@ import Products from "./component/Product/Products.js";
 import Search from "./component/Product/Search.js";
 
 import LoginSignUp from "./component/User/LoginSignUp";
+import Profile from "./component/User/Profile.js";
+import UpdateProfile from "./component/User/UpdateProfile.js";
 
-export { Header, Footer, Home, ProductDetails, Products, Search, LoginSignUp };
+export {
+  Header,
+  UserOptions,
+  Footer,
+  Home,
+  ProductDetails,
+  Products,
+  Search,
+  LoginSignUp,
+  Profile,
+  UpdateProfile,
+};

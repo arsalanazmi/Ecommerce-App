@@ -11,6 +11,9 @@ import Search from "./component/Product/Search.js";
 import LoginSignUp from "./component/User/LoginSignUp";
 import Profile from "./component/User/Profile.js";
 import UpdateProfile from "./component/User/UpdateProfile.js";
+import UpdatePassword from "./component/User/UpdatePassword.js";
+import ForgotPassword from "./component/User/ForgotPassword.js";
+import ResetPassword from "./component/User/ResetPassword.js";
 
 export {
   Header,
@@ -23,4 +26,7 @@ export {
   LoginSignUp,
   Profile,
   UpdateProfile,
+  UpdatePassword,
+  ForgotPassword,
+  ResetPassword,
 };

@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, login, register } from "../../actions/userAction";
 import { useAlert } from "react-alert";
 import { useNavigate } from "react-router-dom";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const LoginSignUp = () => {
   const dispatch = useDispatch();
@@ -23,8 +25,11 @@ const LoginSignUp = () => {
   const registerTab = useRef(null);
   const switcherTab = useRef(null);
 
-  const [loginEmail, setLoginEmail] = useState();
-  const [loginPassword, setLoginPassword] = useState();
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+
+  const [loginPasswordShow, setLoginPasswordShow] = useState(false);
+  const [registerPasswordShow, setRegisterPasswordShow] = useState(false);
 
   const [user, setUser] = useState({
     name: "",
@@ -127,12 +132,20 @@ const LoginSignUp = () => {
                 <div className="loginPasswrd">
                   <LockOpenIcon />
                   <input
-                    type="password"
+                    type={!loginPasswordShow ? "password" : "text"}
                     placeholder="Password"
                     required
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
                   />
+                  <span
+                    className="icon"
+                    onClick={() => {
+                      setLoginPasswordShow(!loginPasswordShow);
+                    }}
+                  >
+                    {loginPasswordShow ? <Visibility /> : <VisibilityOff />}
+                  </span>
                 </div>
                 <Link to="/password/forgot">Forget Password ?</Link>
                 <input type="submit" value="Login" className="loginBtn" />
@@ -168,13 +181,21 @@ const LoginSignUp = () => {
                 <div className="signUpPassword">
                   <LockOpenIcon />
                   <input
-                    type="password"
+                    type={registerPasswordShow ? "text" : "password"}
                     placeholder="Password"
                     required
                     name="password"
                     value={password}
                     onChange={registerDataChange}
                   />
+                  <span
+                    className="icon"
+                    onClick={() => {
+                      setRegisterPasswordShow(!registerPasswordShow);
+                    }}
+                  >
+                    {registerPasswordShow ? <Visibility /> : <VisibilityOff />}
+                  </span>
                 </div>
                 <div id="registerImage">
                   <img src={avatarPreview} alt="Avatar Preview" />

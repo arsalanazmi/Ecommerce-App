@@ -69,6 +69,7 @@
   border-radius: 100%;
   margin: 1vmax;
 }
+
 #updateProfileImage > input {
   display: flex;
   padding: 0%;
@@ -114,6 +115,7 @@
   .updateProfileContainer {
     background-color: white;
   }
+
   .updateProfileBox {
     width: 100vw;
     height: 95vh;

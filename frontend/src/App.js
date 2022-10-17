@@ -13,6 +13,9 @@ import {
   UserOptions,
   Profile,
   UpdateProfile,
+  UpdatePassword,
+  ForgotPassword,
+  ResetPassword,
 } from "./Routes";
 import store from "./store";
 import { loadUser } from "./actions/userAction";
@@ -49,6 +52,18 @@ function App() {
         <Route exact path="/me/update" element={<ProtectedRoute />}>
           <Route exact path="/me/update" element={<UpdateProfile />} />
         </Route>
+
+        <Route exact path="/password/update" element={<ProtectedRoute />}>
+          <Route exact path="/password/update" element={<UpdatePassword />} />
+        </Route>
+
+        <Route exact path="/password/forgot" element={<ForgotPassword />} />
+
+        <Route
+          exact
+          path="/password/reset/:token"
+          element={<ResetPassword />}
+        />
 
         <Route exact path="/login" element={<LoginSignUp />} />
       </Routes>

@@ -83,21 +83,23 @@ const UpdateProfile = () => {
                 encType="multipart/form-data"
                 onSubmit={updateProfileSubmit}
               >
-                <div className="updateProfileName">
+                <div>
                   <FaceIcon />
                   <input
                     type="text"
                     placeholder="Name"
+                    required
                     name="name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
-                <div className="updateProfileEmail">
+                <div>
                   <MailOutLineIcon />
                   <input
                     type="email"
                     placeholder="Email"
+                    required
                     name="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}

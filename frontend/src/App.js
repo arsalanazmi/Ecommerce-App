@@ -16,6 +16,7 @@ import {
   UpdatePassword,
   ForgotPassword,
   ResetPassword,
+  Cart,
 } from "./Routes";
 import store from "./store";
 import { loadUser } from "./actions/userAction";
@@ -66,6 +67,8 @@ function App() {
         />
 
         <Route exact path="/login" element={<LoginSignUp />} />
+
+        <Route exact path="/Cart" element={<Cart />} />
       </Routes>
       <Footer />
     </Router>

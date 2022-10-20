@@ -6,9 +6,10 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ListAltIcon from "@material-ui/icons/ListAlt";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { useAlert } from "react-alert";
 import { logout } from "../../../actions/userAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Backdrop from "@mui/material/Backdrop";
 import { useNavigate } from "react-router-dom";
 
@@ -18,9 +19,20 @@ const UserOptions = ({ user }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const { cartItems } = useSelector((state) => state.cart);
+
   const options = [
     { icon: <ListAltIcon />, name: "Orders", func: orders },
     { icon: <PersonIcon />, name: "Profile", func: account },
+    {
+      icon: (
+        <ShoppingCartIcon
+          style={{ color: cartItems.length > 0 ? "tomato" : "unset" }}
+        />
+      ),
+      name: `Cart (${cartItems.length})`,
+      func: cart,
+    },
     { icon: <ExitToAppIcon />, name: "logout", func: logoutUser },
   ];
 
@@ -44,10 +56,15 @@ const UserOptions = ({ user }) => {
     navigate("/account");
   }
 
+  function cart() {
+    navigate("/cart");
+  }
+
   function logoutUser() {
     dispatch(logout());
     alert.success("Logout Successfully");
   }
+
   return (
     <Fragment>
       <Backdrop open={open} style={{ zIndex: "10" }} />
@@ -73,6 +90,7 @@ const UserOptions = ({ user }) => {
             icon={item.icon}
             tooltipTitle={item.name}
             onClick={item.func}
+            tooltipOpen={window.innerWidth <= 600 ? true : false}
           />
         ))}
       </SpeedDial>

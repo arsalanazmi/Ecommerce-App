@@ -15,6 +15,8 @@ import UpdatePassword from "./component/User/UpdatePassword.js";
 import ForgotPassword from "./component/User/ForgotPassword.js";
 import ResetPassword from "./component/User/ResetPassword.js";
 
+import Cart from "./component/Cart/Cart.js"
+
 export {
   Header,
   UserOptions,
@@ -29,4 +31,5 @@ export {
   UpdatePassword,
   ForgotPassword,
   ResetPassword,
+  Cart
 };

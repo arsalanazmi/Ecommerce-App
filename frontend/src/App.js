@@ -17,6 +17,8 @@ import {
   ForgotPassword,
   ResetPassword,
   Cart,
+  Shipping,
+  ConfirmOrder,
 } from "./Routes";
 import store from "./store";
 import { loadUser } from "./actions/userAction";
@@ -69,6 +71,14 @@ function App() {
         <Route exact path="/login" element={<LoginSignUp />} />
 
         <Route exact path="/Cart" element={<Cart />} />
+
+        <Route exact path="/shipping" element={<ProtectedRoute />}>
+          <Route exact path="/shipping" element={<Shipping />} />
+        </Route>
+
+        <Route exact path="/order/confirm" element={<ProtectedRoute />}>
+          <Route exact path="/order/confirm" element={<ConfirmOrder />} />
+        </Route>
       </Routes>
       <Footer />
     </Router>

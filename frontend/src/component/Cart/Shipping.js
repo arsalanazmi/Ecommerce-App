@@ -42,6 +42,7 @@ const Shipping = () => {
 
     navigate("/order/confirm");
   };
+
   return (
     <Fragment>
       <MetaData title="Shopping Details" />

@@ -5,10 +5,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { addItemsToCart, removeItemsFromCart } from "../../actions/cartActions";
 import Typography from "@mui/material/Typography";
 import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import MetaData from "../layout/MetaData";
 
 const Cart = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { isAuthenticated } = useSelector((state) => state.user);
   const { cartItems } = useSelector((state) => state.cart);
 
   const increaseQuantity = (id, quantity, stock) => {
@@ -32,9 +36,18 @@ const Cart = () => {
   const deleteCartItems = (id) => {
     dispatch(removeItemsFromCart(id));
   };
-  
+
+  const checkOutHandler = () => {
+    if (isAuthenticated) {
+      navigate("/shipping");
+    } else {
+      navigate("/login");
+    }
+  };
+
   return (
     <Fragment>
+      <MetaData title="Shopping Cart" />
       {cartItems.length === 0 ? (
         <div className="emptyCart">
           <RemoveShoppingCartIcon />
@@ -92,7 +105,7 @@ const Cart = () => {
               </div>
               <div></div>
               <div className="checkOutBtn">
-                <button>Check Out</button>
+                <button onClick={checkOutHandler}>Check Out</button>
               </div>
             </div>
           </div>

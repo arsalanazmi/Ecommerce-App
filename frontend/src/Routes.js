@@ -15,7 +15,9 @@ import UpdatePassword from "./component/User/UpdatePassword.js";
 import ForgotPassword from "./component/User/ForgotPassword.js";
 import ResetPassword from "./component/User/ResetPassword.js";
 
-import Cart from "./component/Cart/Cart.js"
+import Cart from "./component/Cart/Cart.js";
+import Shipping from "./component/Cart/Shipping.js";
+import ConfirmOrder from "./component/Cart/ConfirmOrder.js";
 
 export {
   Header,
@@ -31,5 +33,7 @@ export {
   UpdatePassword,
   ForgotPassword,
   ResetPassword,
-  Cart
+  Cart,
+  Shipping,
+  ConfirmOrder
 };

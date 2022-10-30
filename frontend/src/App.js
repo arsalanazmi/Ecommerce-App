@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import webfont from "webfontloader";
@@ -19,22 +19,37 @@ import {
   Cart,
   Shipping,
   ConfirmOrder,
+  Payment,
+  OrderSuccess,
 } from "./Routes";
 import store from "./store";
 import { loadUser } from "./actions/userAction";
 import { useSelector } from "react-redux";
 import ProtectedRoute from "./component/Route/ProtectedRoute";
+import axios from "axios";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
 
-  React.useEffect(() => {
+  const [stripeApiKey, setStripeAPiKey] = useState("");
+
+  async function getStripeAPiKey() {
+    const { data } = await axios.get("/api/v1/stripeapikey");
+    setStripeAPiKey(data.stripeApiKey);
+  }
+
+  useEffect(() => {
     webfont.load({
       google: {
         families: ["Roboto", "Droid Sans", "Chilanka"],
       },
     });
+
     store.dispatch(loadUser());
+
+    getStripeAPiKey();
   }, []);
 
   return (
@@ -79,7 +94,25 @@ function App() {
         <Route exact path="/order/confirm" element={<ProtectedRoute />}>
           <Route exact path="/order/confirm" element={<ConfirmOrder />} />
         </Route>
+
+        <Route element={<ProtectedRoute />} />
+
+        {stripeApiKey && (
+          <Route
+            path="/process/payment"
+            element={
+              <Elements stripe={loadStripe(stripeApiKey)}>
+                <Payment />
+              </Elements>
+            }
+          />
+        )}
+
+        <Route exact path="/success" element={<ProtectedRoute />}>
+          <Route exact path="/success" element={<OrderSuccess />} />
+        </Route>
       </Routes>
+
       <Footer />
     </Router>
   );

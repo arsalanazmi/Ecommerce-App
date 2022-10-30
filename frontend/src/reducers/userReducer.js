@@ -76,7 +76,7 @@ export const userReducer = (state = { user: {} }, action) => {
       return {
         ...state,
         loading: false,
-        erro: action.payload,
+        error: action.payload,
       };
 
     case CLEAR_ERRORS:

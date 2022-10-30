@@ -9,7 +9,7 @@ import ReviewCard from "./ReviewCard.js";
 import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
 import MetaData from "../layout/MetaData";
-import { addItemsToCart } from "../../actions/cartActions";
+import { addItemsToCart } from "../../actions/cartAction";
 
 const ProductDetails = () => {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import "./Shipping.css";
 import { useSelector, useDispatch } from "react-redux";
-import { saveShippingInfo } from "../../actions/cartActions";
+import { saveShippingInfo } from "../../actions/cartAction";
 import { useAlert } from "react-alert";
 import { useNavigate } from "react-router-dom";
 import MetaData from "../layout/MetaData";
@@ -26,18 +26,18 @@ const Shipping = () => {
   const [state, setState] = useState(shippingInfo.state);
   const [country, setCountry] = useState(shippingInfo.country);
   const [pinCode, setPinCode] = useState(shippingInfo.pinCode);
-  const [phoneNo, setPhoneNo] = useState(shippingInfo.phoneNo);
+  const [phoneNumber, setPhoneNumber] = useState(shippingInfo.phoneNumber);
 
   const shippingSubmit = (e) => {
     e.preventDefault();
 
-    if (phoneNo.length < 11 || phoneNo.length > 11) {
+    if (phoneNumber.length < 11 || phoneNumber.length > 11) {
       alert.error("Phone Number should be 10 digits long");
       return;
     }
 
     dispatch(
-      saveShippingInfo({ address, city, state, country, pinCode, phoneNo })
+      saveShippingInfo({ address, city, state, country, pinCode, phoneNumber })
     );
 
     navigate("/order/confirm");
@@ -99,8 +99,8 @@ const Shipping = () => {
                 type="number"
                 placeholder="Phone Number"
                 required
-                value={phoneNo}
-                onChange={(e) => setPhoneNo(e.target.value)}
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
                 size="10"
               />
             </div>

@@ -21,6 +21,8 @@ import {
   ConfirmOrder,
   Payment,
   OrderSuccess,
+  MyOrders,
+  OrderDetails,
 } from "./Routes";
 import store from "./store";
 import { loadUser } from "./actions/userAction";
@@ -111,6 +113,15 @@ function App() {
         <Route exact path="/success" element={<ProtectedRoute />}>
           <Route exact path="/success" element={<OrderSuccess />} />
         </Route>
+
+        <Route exact path="/orders" element={<ProtectedRoute />}>
+          <Route exact path="/orders" element={<MyOrders />} />
+        </Route>
+
+        <Route exact path="/order/:id" element={<ProtectedRoute />}>
+          <Route exact path="/order/:id" element={<OrderDetails />} />
+        </Route>
+        
       </Routes>
 
       <Footer />

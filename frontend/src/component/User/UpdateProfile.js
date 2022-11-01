@@ -50,14 +50,16 @@ const UpdateProfile = () => {
 
   useEffect(() => {
     if (user) {
-      setName(user.name);
-      setEmail(user.email);
-      setAvatarPreview(user.avatar.url);
+      setName(user?.name);
+      setEmail(user?.email);
+      setAvatarPreview(user?.avatar?.url);
     }
+
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
+    
     if (isUpdated) {
       alert.success("Profile Updated Successfully");
       dispatch(loadUser());
@@ -75,9 +77,11 @@ const UpdateProfile = () => {
       ) : (
         <Fragment>
           <MetaData title="Update Profile" />
+    
           <div className="updateProfileContainer">
             <div className="updateProfileBox">
               <h2 className="updateProfileHeading">Update Profile</h2>
+    
               <form
                 className="updateProfileForm"
                 encType="multipart/form-data"
@@ -94,6 +98,7 @@ const UpdateProfile = () => {
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
+    
                 <div>
                   <MailOutLineIcon />
                   <input
@@ -105,6 +110,7 @@ const UpdateProfile = () => {
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
+    
                 <div id="updateProfileImage">
                   <img src={avatarPreview} alt="Avatar Preview" />
                   <input
@@ -114,6 +120,7 @@ const UpdateProfile = () => {
                     onChange={updateProfileDataChange}
                   />
                 </div>
+    
                 <input
                   type="submit"
                   value="Update"

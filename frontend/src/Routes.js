@@ -20,6 +20,8 @@ import Shipping from "./component/Cart/Shipping.js";
 import ConfirmOrder from "./component/Cart/ConfirmOrder.js";
 import Payment from "./component/Cart/Payment.js";
 import OrderSuccess from "./component/Cart/OrderSuccess.js";
+import MyOrders from "./component/Order/MyOrders.js";
+import OrderDetails from "./component/Order/OrderDetails.js";
 
 export {
   Header,
@@ -40,4 +42,6 @@ export {
   ConfirmOrder,
   Payment,
   OrderSuccess,
+  MyOrders,
+  OrderDetails,
 };

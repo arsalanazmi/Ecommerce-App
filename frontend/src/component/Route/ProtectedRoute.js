@@ -7,7 +7,8 @@ const ProtectedRoute = () => {
 
   return (
     <Fragment>
-      {!loading && (isAuthenticated ? <Outlet /> : <Navigate to="/login" />)}
+      {!loading &&
+        (isAuthenticated === false ? <Navigate to="/login" /> : <Outlet />)}
     </Fragment>
   );
 };

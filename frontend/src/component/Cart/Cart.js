@@ -12,7 +12,7 @@ const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isAuthenticated } = useSelector((state) => state.user);
+  const { isAuthenticated, user } = useSelector((state) => state.user);
   const { cartItems } = useSelector((state) => state.cart);
 
   const increaseQuantity = (id, quantity, stock) => {
@@ -45,10 +45,14 @@ const Cart = () => {
     }
   };
 
+  let filteredItems = cartItems.filter((item) => {
+    return item?.user === user?._id;
+  });
+
   return (
     <Fragment>
       <MetaData title="Shopping Cart" />
-      {cartItems.length === 0 ? (
+      {filteredItems?.length === 0 ? (
         <div className="emptyCart">
           <RemoveShoppingCartIcon />
           <Typography>No Product in Your Cart</Typography>
@@ -63,8 +67,8 @@ const Cart = () => {
               <p>Subtotal</p>
             </div>
 
-            {cartItems &&
-              cartItems.map((item) => (
+            {filteredItems &&
+              filteredItems.map((item) => (
                 <div key={item.product} className="cartContainer">
                   <CartItemCard item={item} deleteCartItems={deleteCartItems} />
                   <div className="cartInput">
@@ -98,7 +102,7 @@ const Cart = () => {
               <div></div>
               <div className="cartGrossTotalBox">
                 <p>Gross Total</p>
-                <p>{`PKR ${cartItems.reduce(
+                <p>{`PKR ${filteredItems.reduce(
                   (acc, item) => acc + item.quantity * item.price,
                   0
                 )}`}</p>

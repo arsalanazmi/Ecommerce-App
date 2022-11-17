@@ -19,7 +19,7 @@ const ProductCard = ({ product }) => {
         <span className="productCardSpan">{product?.numOfReviews} Reviews</span>
       </div>
 
-      <span>{`PKR${product?.price}`}</span>
+      <span>{`PKR ${product?.price}`}</span>
     </Link>
   );
 };

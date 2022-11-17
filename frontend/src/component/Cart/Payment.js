@@ -18,6 +18,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { useNavigate } from "react-router-dom";
 import { createOrder, clearErrors } from "../../actions/orderAction";
+import { deleteCart } from "../../actions/cartAction";
 
 const Payment = () => {
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
@@ -37,9 +38,13 @@ const Payment = () => {
     amount: Math.round(orderInfo.totalPrice * 100),
   };
 
+  let filteredItems = cartItems.filter((item) => {
+    return item?.user === user?._id;
+  });
+
   const order = {
     shippingInfo,
-    orderItems: cartItems,
+    orderItems: filteredItems,
     itemsPrice: orderInfo.subTotal,
     taxPrice: orderInfo.tax,
     shippingPrice: orderInfo.shippingCharges,
@@ -95,7 +100,7 @@ const Payment = () => {
           };
 
           dispatch(createOrder(order));
-
+          dispatch(deleteCart(user._id));
           navigate("/success");
         } else {
           alert.error("There is some issue while processing payment.");

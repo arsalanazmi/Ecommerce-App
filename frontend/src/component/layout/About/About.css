@@ -1,0 +1,151 @@
+.aboutSection {
+  height: 100vh;
+  width: 100vw;
+  max-width: 100%;
+  background-color: white;
+  display: grid;
+  grid-template-columns: 4fr 4fr;
+  position: fixed;
+}
+
+.aboutSectionGradient {
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(78, 106, 110),
+    rgb(124, 149, 170)
+  );
+}
+
+.aboutSectionContainer {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: rgb(255, 255, 255);
+  width: 80vw;
+  height: 80vh;
+  transform: translateX(-50%) translateY(-50%);
+  box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.192);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.aboutSectionContainer > h1 {
+  font: 200 3.3vmax "Roboto" !important;
+  color: tomato;
+  text-decoration: underline;
+  margin: 2vmax;
+}
+
+.aboutSectionContainer > div {
+  display: flex;
+  width: 100%;
+}
+
+.aboutSectionContainer > div > div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2vmax;
+  box-sizing: border-box;
+}
+
+.aboutSectionContainer > div > div > div .MuiTypography-body1 {
+  color: rgb(175, 171, 171);
+  font: 300 2.3vmax "Roboto" !important;
+  margin-bottom: 0.8vmax !important;
+}
+
+.aboutSectionContainer > div > div > div {
+  margin: 1.3vmax 0;
+}
+
+.aboutSectionContainer > div > div > div > span {
+  font: 100 1.2vmax "Roboto";
+  color: rgba(0, 0, 0, 0.795);
+  text-align: center;
+  width: 80%;
+}
+.aboutSectionContainer > div > div > button {
+  margin: 1vmax 0;
+  background-color: tomato;
+  color: white;
+  text-transform: capitalize;
+}
+
+.aboutSectionContainer > div > div > button:hover {
+  background-color: rgb(245, 43, 8);
+  color: white;
+}
+
+.aboutSectionContainer2 {
+  border-left: 1px solid rgba(0, 0, 0, 0.116);
+}
+
+.aboutSectionContainer2 > h6 {
+  color: rgba(0, 0, 0, 0.685);
+  font: 100 2vmax "Roboto";
+  margin: 2vmax;
+}
+
+.aboutSectionContainer2 > a > svg {
+  font-size: 4vmax;
+}
+
+.facebookSvgIcon {
+  color: rgb(65, 132, 196);
+}
+
+.facebookSvgIcon:hover {
+  transition: all 0.3s;
+  color: rgb(9, 67, 121);
+}
+
+.githubSvgIcon {
+  color: rgb(97, 100, 102);
+}
+
+.githubSvgIcon:hover {
+  color: rgb(41, 42, 43);
+}
+
+@media screen and (max-width: 600px) {
+  .aboutSectionContainer > div {
+    display: block;
+  }
+
+  .aboutSectionContainer > h1 {
+    font: 500 4vmax "Roboto";
+    margin: 3vmax;
+  }
+
+  .aboutSectionContainer > div > div > div {
+    text-align: center;
+  }
+
+  .aboutSectionContainer > div > div > div > .MuiTypography-body1 {
+    font: 300 3vmax "Roboto" !important;
+    margin-bottom: 1vmax;
+  }
+
+  .aboutSectionContainer > div > div > div > span {
+    font: 100 1.5vmax "Roboto";
+    width: 70%;
+  }
+
+  .aboutSectionContainer2 {
+    border-left: none;
+  }
+
+  .aboutSectionContainer2 > h2 {
+    font: 100 3vmax "Roboto";
+    margin: 2vmax;
+  }
+
+  .aboutSectionContainer2 > a > svg {
+    font-size: 6vmax;
+    margin: 1vmax;
+  }
+}

@@ -8,6 +8,8 @@ import {
   Home,
   ProductDetails,
   Products,
+  Contact,
+  About,
   Search,
   LoginSignUp,
   UserOptions,
@@ -23,6 +25,16 @@ import {
   OrderSuccess,
   MyOrders,
   OrderDetails,
+  Dashboard,
+  ProductList,
+  NewProduct,
+  UpdateProduct,
+  OrderList,
+  ProcessOrder,
+  UsersList,
+  UpdateUser,
+  ProductReviews,
+  NotFound,
 } from "./Routes";
 import store from "./store";
 import { loadUser } from "./actions/userAction";
@@ -54,6 +66,8 @@ function App() {
     getStripeAPiKey();
   }, []);
 
+  window.addEventListener("contextmenu", (e) => e.preventDefault());
+
   return (
     <Router>
       <Header />
@@ -63,19 +77,39 @@ function App() {
         <Route exact path="/product/:id" element={<ProductDetails />} />
         <Route exact path="/products" element={<Products />} />
         <Route path="/products/:keyword" element={<Products />} />
+        <Route exact path="/contact" element={<Contact />} />
+        <Route exact path="/about" element={<About />} />
         <Route exact path="/search" element={<Search />} />
 
-        <Route exact path="/account" element={<ProtectedRoute />}>
-          <Route exact path="/account" element={<Profile />} />
-        </Route>
+        <Route
+          exact
+          path="/account"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
 
-        <Route exact path="/me/update" element={<ProtectedRoute />}>
-          <Route exact path="/me/update" element={<UpdateProfile />} />
-        </Route>
+        <Route
+          exact
+          path="/me/update"
+          element={
+            <ProtectedRoute>
+              <UpdateProfile />
+            </ProtectedRoute>
+          }
+        />
 
-        <Route exact path="/password/update" element={<ProtectedRoute />}>
-          <Route exact path="/password/update" element={<UpdatePassword />} />
-        </Route>
+        <Route
+          exact
+          path="/password/update"
+          element={
+            <ProtectedRoute>
+              <UpdatePassword />
+            </ProtectedRoute>
+          }
+        />
 
         <Route exact path="/password/forgot" element={<ForgotPassword />} />
 
@@ -87,17 +121,35 @@ function App() {
 
         <Route exact path="/login" element={<LoginSignUp />} />
 
-        <Route exact path="/Cart" element={<Cart />} />
+        <Route
+          exact
+          path="/cart"
+          element={
+            <ProtectedRoute>
+              <Cart />
+            </ProtectedRoute>
+          }
+        />
 
-        <Route exact path="/shipping" element={<ProtectedRoute />}>
-          <Route exact path="/shipping" element={<Shipping />} />
-        </Route>
+        <Route
+          exact
+          path="/shipping"
+          element={
+            <ProtectedRoute>
+              <Shipping />
+            </ProtectedRoute>
+          }
+        />
 
-        <Route exact path="/order/confirm" element={<ProtectedRoute />}>
-          <Route exact path="/order/confirm" element={<ConfirmOrder />} />
-        </Route>
-
-        <Route element={<ProtectedRoute />} />
+        <Route
+          exact
+          path="/order/confirm"
+          element={
+            <ProtectedRoute>
+              <ConfirmOrder />
+            </ProtectedRoute>
+          }
+        />
 
         {stripeApiKey && (
           <Route
@@ -110,18 +162,127 @@ function App() {
           />
         )}
 
-        <Route exact path="/success" element={<ProtectedRoute />}>
-          <Route exact path="/success" element={<OrderSuccess />} />
-        </Route>
+        <Route
+          exact
+          path="/success"
+          element={
+            <ProtectedRoute>
+              <OrderSuccess />
+            </ProtectedRoute>
+          }
+        />
 
-        <Route exact path="/orders" element={<ProtectedRoute />}>
-          <Route exact path="/orders" element={<MyOrders />} />
-        </Route>
+        <Route
+          exact
+          path="/orders"
+          element={
+            <ProtectedRoute>
+              <MyOrders />
+            </ProtectedRoute>
+          }
+        />
 
-        <Route exact path="/order/:id" element={<ProtectedRoute />}>
-          <Route exact path="/order/:id" element={<OrderDetails />} />
-        </Route>
-        
+        <Route
+          exact
+          path="/order/:id"
+          element={
+            <ProtectedRoute>
+              <OrderDetails />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          exact
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute isAdmin={true}>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          exact
+          path="/admin/products"
+          element={
+            <ProtectedRoute isAdmin={true}>
+              <ProductList />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          exact
+          path="/admin/product"
+          element={
+            <ProtectedRoute isAdmin={true}>
+              <NewProduct />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          exact
+          path="/admin/product/:id"
+          element={
+            <ProtectedRoute isAdmin={true}>
+              <UpdateProduct />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          exact
+          path="/admin/orders"
+          element={
+            <ProtectedRoute isAdmin={true}>
+              <OrderList />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          exact
+          path="/admin/order/:id"
+          element={
+            <ProtectedRoute isAdmin={true}>
+              <ProcessOrder />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          exact
+          path="/admin/users"
+          element={
+            <ProtectedRoute isAdmin={true}>
+              <UsersList />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          exact
+          path="/admin/user/:id"
+          element={
+            <ProtectedRoute isAdmin={true}>
+              <UpdateUser />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          exact
+          path="/admin/reviews"
+          element={
+            <ProtectedRoute isAdmin={true}>
+              <ProductReviews />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       <Footer />

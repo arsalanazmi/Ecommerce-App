@@ -51,7 +51,6 @@ export const deleteCart = (userId) => async (dispatch, getState) => {
 };
 
 // Save shipping Info
-
 export const saveShippingInfo = (data) => async (dispatch) => {
   dispatch({
     type: SAVE_SHIPPING_INFO,

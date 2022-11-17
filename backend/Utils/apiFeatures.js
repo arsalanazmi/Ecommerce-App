@@ -3,6 +3,7 @@ class ApiFeatures {
     this.query = query;
     this.queryStr = queryStr;
   }
+
   search() {
     const keyword = this.queryStr.keyword
       ? {
@@ -22,7 +23,7 @@ class ApiFeatures {
   filter() {
     const queryCopy = { ...this.queryStr };
 
-    // Removing some fileds for category
+    // Removing some fields for category
     const removeFields = ["keyword", "page", "limit"];
 
     removeFields.forEach((key) => delete queryCopy[key]);

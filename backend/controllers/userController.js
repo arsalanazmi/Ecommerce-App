@@ -37,6 +37,7 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
   if (!email || !password) {
     return next(new ErrorHandler("Please Enter Email & Password", 400));
   }
+
   const user = await User.findOne({ email }).select("+password");
 
   if (!user) {
@@ -61,7 +62,7 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    message: "logged Out",
+    message: "Logged Out",
   });
 });
 
@@ -70,19 +71,17 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
-    return next(new ErrorHandler("usernot found", 404));
+    return next(new ErrorHandler("User Not found", 404));
   }
 
   // Get Password Token
   const resetToken = user.getResetPasswordToken();
   await user.save({ validateBeforeSave: false });
 
-  const resetPasswordUrl = `${req.protocol}://${req.get(
-    "host"
-  )}/api/v1/password/reset/${resetToken}`;
+  const resetPasswordUrl = `${process.env.FRONTEND_URL}/password/reset/${resetToken}`;
 
   const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n 
-  If you have not requested this email then, please ignore it`;
+  If you have not requested this email then, please ignore it.`;
 
   try {
     await sendEmail({
@@ -243,7 +242,7 @@ exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
     role: req.body.role,
   };
 
-  const user = await User.findByIdAndUpdate(req.params.id, newUserData, {
+  await User.findByIdAndUpdate(req.params.id, newUserData, {
     new: true,
     runValidators: true,
     useFindAndModify: false,
@@ -258,13 +257,15 @@ exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
 exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(req.params.id);
 
-  // We will remove cloudinary later
-
   if (!user) {
     return next(
       new ErrorHandler(`User does not exist with id: ${req.params.id}`, 400)
     );
   }
+
+  const imageId = await user.avatar.public_id;
+
+  await cloudinary.v2.uploader.destroy(imageId);
 
   await user.remove();
 

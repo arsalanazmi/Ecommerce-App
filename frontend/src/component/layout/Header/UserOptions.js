@@ -2,11 +2,12 @@ import React, { Fragment, useState } from "react";
 import "./Header.css";
 import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import PersonIcon from "@material-ui/icons/Person";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import ListAltIcon from "@material-ui/icons/ListAlt";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import PersonIcon from '@mui/icons-material/Person';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
 import { useAlert } from "react-alert";
 import { logout } from "../../../actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,6 +21,10 @@ const UserOptions = ({ user }) => {
   const navigate = useNavigate();
 
   const { cartItems } = useSelector((state) => state.cart);
+  
+  let filteredItems = cartItems.filter((item) => {
+    return item?.user === user?._id;
+  });
 
   const options = [
     { icon: <ListAltIcon />, name: "Orders", func: orders },
@@ -27,10 +32,10 @@ const UserOptions = ({ user }) => {
     {
       icon: (
         <ShoppingCartIcon
-          style={{ color: cartItems.length > 0 ? "tomato" : "unset" }}
+          style={{ color: filteredItems.length > 0 ? "tomato" : "unset" }}
         />
       ),
-      name: `Cart (${cartItems.length})`,
+      name: `Cart (${filteredItems.length})`,
       func: cart,
     },
     { icon: <ExitToAppIcon />, name: "logout", func: logoutUser },
@@ -45,7 +50,7 @@ const UserOptions = ({ user }) => {
   }
 
   function dashboard() {
-    navigate("/dashboard");
+    navigate("/admin/dashboard");
   }
 
   function orders() {

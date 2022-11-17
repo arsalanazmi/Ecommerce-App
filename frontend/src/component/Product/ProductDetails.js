@@ -7,7 +7,7 @@ import {
   getProductDetails,
   newReview,
 } from "../../actions/productAction";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ReviewCard from "./ReviewCard.js";
 import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
@@ -27,6 +27,7 @@ const ProductDetails = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const alert = useAlert();
+  const navigate = useNavigate();
 
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
@@ -35,6 +36,7 @@ const ProductDetails = () => {
   const { success, error: reviewError } = useSelector(
     (state) => state.newReview
   );
+  const { isAuthenticated, user } = useSelector((state) => state.user);
 
   const [quantity, setQuantity] = useState(1);
   const [open, setOpen] = useState(false);
@@ -56,8 +58,13 @@ const ProductDetails = () => {
   };
 
   const addToCartHandler = () => {
-    dispatch(addItemsToCart(id, quantity));
-    alert.success("Items added to Cart");
+    if (isAuthenticated) {
+      dispatch(addItemsToCart(id, quantity, user._id));
+      alert.success("Items added to Cart");
+      navigate("/cart");
+    } else {
+      alert.error("Please Login to access this Resource.");
+    }
   };
 
   const submitReviewToggle = () => {
@@ -71,7 +78,6 @@ const ProductDetails = () => {
     myForm.set("comment", comment);
     myForm.set("productId", id);
 
-    console.log("submitted");
     dispatch(newReview(myForm));
 
     setOpen(false);
@@ -94,7 +100,7 @@ const ProductDetails = () => {
     }
 
     dispatch(getProductDetails(id));
-  }, [dispatch, id, error, alert, reviewError, success]);
+  }, [dispatch, id, error, alert, reviewError, success, product.Stock]);
 
   const options = {
     value: product?.ratings,
@@ -154,7 +160,7 @@ const ProductDetails = () => {
                     Add to Cart
                   </button>
                 </div>
-                
+
                 <p>
                   Status:
                   <b className={product?.Stock < 1 ? "redColor" : "greenColor"}>

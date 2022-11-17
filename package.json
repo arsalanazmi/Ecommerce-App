@@ -1,7 +1,10 @@
 {
   "name": "ecommerce-app",
   "version": "1.0.0",
-  "description": "Full Stack Ecommerce App with Payment Method",
+  "engines": {
+    "node": "16.x"
+  },
+  "description": "Your Trusted Ecommerce Platform",
   "main": "backend/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

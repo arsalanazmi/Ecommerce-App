@@ -2,9 +2,9 @@ const express = require("express");
 const {
   processPayment,
   sendStripeApiKey,
-} = require("../controllers/paymentController");
+} = require("../controllers/paymentController.js");
 const router = express.Router();
-const { isAuthenticatedUser } = require("../middleware/auth");
+const { isAuthenticatedUser } = require("../middleware/auth.js");
 
 router.route("/payment/process").post(isAuthenticatedUser, processPayment);
 

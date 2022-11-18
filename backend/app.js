@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const path = require("path");
 
-const errorMiddleware = require("./middleware/error");
+const errorMiddleware = require("./middleware/error.js");
 
 // Config
 if (process.env.NODE_ENV !== "PRODUCTION") {
@@ -18,10 +18,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(fileUpload());
 
 //Route Imports
-const product = require("./routes/productRoute");
-const user = require("./routes/userRoute");
-const order = require("./routes/orderRoute");
-const payment = require("./routes/paymentRoute");
+const product = require("./routes/productRoute.js");
+const user = require("./routes/userRoute.js");
+const order = require("./routes/orderRoute.js");
+const payment = require("./routes/paymentRoute.js");
 
 app.use("/api/v1", product);
 app.use("/api/v1", user);
